@@ -1,0 +1,35 @@
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Movie Name</th>
+            <th>Description</th>
+            <th>Tags</th>
+            <th>Download Link</th>
+            <th>Poster</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% movies.forEach(movie => { %>
+            <tr>
+                <td><%= movie.name %></td>
+                <td><%= movie.description %></td>
+                <td><%= movie.tags.join(", ") %></td>
+                <td><a href="<%= movie.downloadLink %>" target="_blank">Download</a></td>
+                <td>
+                    <% if (movie.imageUrl) { %>
+                        <img src="<%= movie.imageUrl %>" alt="Movie Poster" width="100">
+                    <% } else if (movie.imagePath) { %>
+                        <img src="<%= movie.imagePath %>" alt="Movie Poster" width="100">
+                    <% } else { %>
+                        <p>No Image</p>
+                    <% } %>
+                </td>
+                <td>
+                    <a href="/admin/edit-movie/<%= movie._id %>" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="/admin/delete-movie/<%= movie._id %>" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
